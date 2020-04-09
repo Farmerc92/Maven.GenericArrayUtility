@@ -14,6 +14,7 @@ public class ArrayUtility<T> {
     public ArrayUtility(T[] array){
         this.array = array;
     }
+
     public Integer countDuplicatesInMerge(T[] arrayToMerge, T valueToEvaluate) {
         Integer count = 0;
         for (T object : array) {
@@ -32,16 +33,10 @@ public class ArrayUtility<T> {
     public T getMostCommonFromMerge(T[] arrayToMerge) {
         HashMap<T, Integer> occurences = new HashMap<>();
         for (T object : arrayToMerge) {
-            if (occurences.containsKey(object))
-                occurences.put(object, occurences.get(object) + 1);
-            else
-                occurences.put(object, 1);
+            occurences.put(object, occurences.getOrDefault(object, 0) + 1);
         }
         for (T object : array) {
-            if (occurences.containsKey(object))
-                occurences.put(object, occurences.get(object) + 1);
-            else
-                occurences.put(object, 1);
+            occurences.put(object, occurences.getOrDefault(object, 0) + 1);
         }
         T mostCommon = null;
         Integer mostCommonOccurence = 0;
@@ -62,7 +57,6 @@ public class ArrayUtility<T> {
         }
         return count;
     }
-
     public T[] removeValue(T valueToRemove) {
         @SuppressWarnings("unchecked")
         T[] buffer = (T[]) Array.newInstance(valueToRemove.getClass(), array.length);
